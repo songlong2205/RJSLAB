@@ -4,6 +4,7 @@ import Menu from './components/MenuComponent';
 import './App.css';
 import { DISHES } from './shared/dishes';
 import { Component } from 'react/cjs/react.production.min';
+import DishDetail from './components/DishdetailComponent';
 
 class App extends Component {
 
@@ -15,18 +16,18 @@ class App extends Component {
     };
   }
 
-  render(){
-  return (
-    <div>
-      <Navbar dark color='primary'>
-        <div className='container'>
-          <NavbarBrand href='/'>React-Project</NavbarBrand>
-        </div>
-      </Navbar>
-      <Menu dishes={this.state.dishes} />
-    </div>
-  );
-}
+  render() {
+    return (
+      <div>
+        <Navbar dark color='primary'>
+          <div className='container'>
+            <NavbarBrand href='/'>React-Project</NavbarBrand>
+          </div>
+        </Navbar>
+        <Menu dishes={this.state.dishes} />
+      </div>
+    );
+  }
 }
 
 export default App;

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Breadcrumb, BreadcrumbItem, Button, Label, Col, Row } from 'reactstrap';
 import { Link } from 'react-router-dom';
-import { Control, Form, Errors} from 'react-redux-form';
+import { Control, LocalForm, Errors} from 'react-redux-form';
 
 const required = (val) => val && val.length;
 const maxLength = (len) => (val) => !(val) || (val.length <= len);
@@ -18,6 +18,7 @@ class Contact extends Component {
     }
 
     handleSubmit(values) {
+        this.props.postFeedback(this.props.feedbackId, values.fname, values.lname, values.contactTel, values.email, values.message);
         console.log("Current State is: " + JSON.stringify(values));
         alert("Thank you for your feedback!" + JSON.stringify(values));
         this.props.resetFeedbackForm()
@@ -67,11 +68,11 @@ class Contact extends Component {
                         <h3>Send us Your Feedback</h3>
                     </div>
                     <div className='col-12 col-md-9'>
-                        <Form model="feedback" onSubmit={(value) => this.handleSubmit(value)}>
+                        <LocalForm onSubmit={(value) => this.handleSubmit(value)}>
                             <Row className='form-group'>
-                                <Label htmlFor='firstname' md={2}>First Name</Label>
+                                <Label htmlFor='fname' md={2}>First Name</Label>
                                 <Col md={10}>
-                                    <Control.text model='.firstname' id='firstname' name='firstname'
+                                    <Control.text model='.fname' id='fname' name='fname'
                                         placeholder='First Name'
                                         className='form-control'
                                         validators={{
@@ -79,7 +80,7 @@ class Contact extends Component {
                                         }} />
                                         <Errors
                                             className='text-danger'    
-                                            model='.firstname'
+                                            model='.fname'
                                             show='touched'
                                             messages={{
                                                 required: 'Required',
@@ -90,9 +91,9 @@ class Contact extends Component {
                                 </Col>
                             </Row>
                             <Row className='form-group'>
-                                <Label htmlFor='lastname' md={2}>Last Name</Label>
+                                <Label htmlFor='lname' md={2}>Last Name</Label>
                                 <Col md={10}>
-                                    <Control.text model='.lastname' id='lastname' name='lastname'
+                                    <Control.text model='.lname' id='lname' name='lname'
                                         placeholder='Last Name'
                                         className='form-control'
                                         validators={{
@@ -100,7 +101,7 @@ class Contact extends Component {
                                         }} />
                                         <Errors
                                             className='text-danger'    
-                                            model='.lastname'
+                                            model='.lname'
                                             show='touched'
                                             messages={{
                                                 required: 'Required',
@@ -111,9 +112,9 @@ class Contact extends Component {
                                 </Col>
                             </Row>
                             <Row className='form-group'>
-                                <Label htmlFor='telnum' md={2}>Contact Tel.</Label>
+                                <Label htmlFor='contactTel' md={2}>Contact Tel.</Label>
                                 <Col md={10}>
-                                    <Control.text model='.telnum' id='telnum' name='telnum'
+                                    <Control.text model='.contactTel' id='contactTel' name='contactTel'
                                         placeholder='Tel.Number'
                                         className='form-control'
                                         validators={{
@@ -121,7 +122,7 @@ class Contact extends Component {
                                         }} />
                                         <Errors
                                             className='text-danger'    
-                                            model='.telnum'
+                                            model='.contactTel'
                                             show='touched'
                                             messages={{
                                                 required: 'Required',
@@ -185,7 +186,7 @@ class Contact extends Component {
                                     </Button>
                                 </Col>
                             </Row>
-                        </Form>
+                        </LocalForm>
                     </div>
                 </div>
             </div>
